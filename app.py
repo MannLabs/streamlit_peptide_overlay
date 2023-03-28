@@ -101,7 +101,8 @@ if protein_sequence and peptide_input and uploaded_files is not None:
             if len(pos) == 0:
                 st.warning(f"Peptide {peptide} not found in protein sequence")
             else:
-                df_peptide_positions.extend(pos)
+                for p in pos:
+                    df_peptide_positions.append((p[0], p[1], row["Score"]))
 
         df_peptide_positions.sort(key=lambda x: x[2], reverse=True)
         df_overlap_positions = get_overlap_positions(df_peptide_positions)
